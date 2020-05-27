@@ -1,9 +1,10 @@
 import React from "react";
-
+import AddItem from "./containers/addItem";
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <div>navegation</div>
+      <AddItem />
     </div>
   );
 }
