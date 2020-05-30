@@ -1,5 +1,6 @@
 import React from "react";
 import style from "styled-components";
+
 const searchBar = props => {
   const InputText = style.input`
         display:block;
@@ -24,7 +25,12 @@ const searchBar = props => {
 
   return (
     <div>
-      <InputText type="text" placeholder="Add Item" />
+      <InputText
+        type="text"
+        placeholder="Add Item"
+        onChange={props.changed}
+        value={props.value}
+      />
     </div>
   );
 };

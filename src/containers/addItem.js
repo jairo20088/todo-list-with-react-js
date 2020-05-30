@@ -1,15 +1,21 @@
 import React from "react";
 import Search from "../component/searcBar";
 import Button from "../component/button";
-import Item from "../component/item";
+import * as actions from "../store/action";
+import { connect } from "react-redux";
 
-const addItem = () => {
+const AddItem = props => {
   return (
     <div>
-      <Search />
+      <Search changed={e => props.onChangeHandler(e.target.value)} />
       <Button label="Add" />
-      <Item />
     </div>
   );
 };
-export default addItem;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeHandler: text => dispatch(actions.onUserInput(text))
+  };
+};
+export default connect(null, mapDispatchToProps)(AddItem);
