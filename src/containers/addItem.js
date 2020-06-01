@@ -7,15 +7,28 @@ import { connect } from "react-redux";
 const AddItem = props => {
   return (
     <div>
-      <Search changed={e => props.onChangeHandler(e.target.value)} />
-      <Button label="Add" />
+      <Search
+        changed={e => props.onChangeHandler(e.target.value)}
+        value={props.userInput}
+      />
+      <Button
+        label="Add"
+        clicked={() => props.onAddItemHandler(props.userInput)}
+      />
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    onChangeHandler: text => dispatch(actions.onUserInput(text))
+    userInput: state.userInput
   };
 };
-export default connect(null, mapDispatchToProps)(AddItem);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeHandler: text => dispatch(actions.userInput(text)),
+    onAddItemHandler: input => dispatch(actions.addTodo(input))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

@@ -1,21 +1,27 @@
 import React from "react";
 import Item from "../component/item";
 import style from "styled-components";
+import { connect } from "react-redux";
 
 const ItemsContainer = style.div`
     margin:4rem auto;
     width:55rem;
 `;
 
-const todoList = ["Do math homework", "Do Laundry", "Do Dishes"];
-
-const Items = () => {
+const Items = props => {
   return (
     <ItemsContainer>
-      {todoList.map((todo, index) => (
+      {props.todos.map((todo, index) => (
         <Item task={todo} key={index} />
       ))}
     </ItemsContainer>
   );
 };
-export default Items;
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  };
+};
+
+export default connect(mapStateToProps)(Items);
