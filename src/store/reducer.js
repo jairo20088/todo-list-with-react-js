@@ -14,6 +14,12 @@ const reducer = (state = initialState, action) => {
         todos.push(action.item);
         return { ...state, todos: todos, userInput: "" };
       }
+      break;
+    case actionTypes.DELETE_ITEM:
+      const todos = [...state.todos];
+      const newTodo = todos.filter((el, index) => index !== action.deletedItem);
+      return { ...state, todos: newTodo };
+
     default:
       return { ...state };
   }

@@ -12,3 +12,9 @@ export const addTodo = text => {
     item: text
   };
 };
+export const deleteItem = item => {
+  return {
+    type: actionTypes.DELETE_ITEM,
+    deletedItem: item
+  };
+};
