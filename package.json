@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,11 @@
   },
   "homepage": "https://github.com/jairo20088/todo-list-with-react-js#readme",
   "dependencies": {
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "sequelize": "^5.21.11"
   }
 }
