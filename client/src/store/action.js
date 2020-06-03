@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import axios from "axios";
 
 export const userInput = inputText => {
   return {
@@ -7,6 +8,9 @@ export const userInput = inputText => {
   };
 };
 export const addTodo = text => {
+  axios.get("http://dummy.restapiexample.com/api/v1/employees").then(result => {
+    console.log(result);
+  });
   return {
     type: actionTypes.ADD_TODO,
     item: text
