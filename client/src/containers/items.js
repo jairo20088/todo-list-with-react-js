@@ -13,9 +13,9 @@ const Items = props => {
   const todos = ["Do homework", "Do Laundry", "Go to the gym"];
   return (
     <ItemsContainer>
-      {props.todos.map((todo, index) => (
+      {props.Items.map((todo, index) => (
         <Item
-          task={todo}
+          task={todo.item}
           key={index}
           deleteItem={() => props.onDeleteHandler(index)}
         />
@@ -26,7 +26,8 @@ const Items = props => {
 
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    Items: state.Item
   };
 };
 const mapDispatchToProps = dispatch => {

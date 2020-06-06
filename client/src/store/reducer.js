@@ -1,7 +1,8 @@
 import * as actionTypes from "./actionTypes";
 const initialState = {
   userInput: "",
-  todos: []
+  todos: [],
+  Item: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +20,8 @@ const reducer = (state = initialState, action) => {
       const todos = [...state.todos];
       const newTodo = todos.filter((el, index) => index !== action.deletedItem);
       return { ...state, todos: newTodo };
-
+    case actionTypes.GET_TODO:
+      return { ...state, Item: action.todos };
     default:
       return { ...state };
   }

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Search from "../component/searcBar";
 import Button from "../component/button";
 import * as actions from "../store/action";
 import { connect } from "react-redux";
 
 const AddItem = props => {
+  useEffect(() => {
+    props.onGetItemHandler();
+    console.log(props.todos);
+  }, [props.userInput]);
   return (
     <div>
       <Search
@@ -21,12 +25,14 @@ const AddItem = props => {
 
 const mapStateToProps = state => {
   return {
-    userInput: state.userInput
+    userInput: state.userInput,
+    todos: state.Item
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    onGetItemHandler: () => dispatch(actions.getItem()),
     onChangeHandler: text => dispatch(actions.userInput(text)),
     onAddItemHandler: input => dispatch(actions.addTodo(input))
   };
