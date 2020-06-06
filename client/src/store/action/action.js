@@ -8,7 +8,7 @@ export const userInput = inputText => {
   };
 };
 
-export const addTodoAction = text => {
+export const addTodoItem = text => {
   return {
     type: actionTypes.ADD_TODO,
     item: text
@@ -16,9 +16,11 @@ export const addTodoAction = text => {
 };
 export const addTodo = text => {
   return dispatch => {
-    axios.post("/api", { ok: text }).then(result => {
-      dispatch(addTodoAction(text));
-    });
+    if (text) {
+      axios.post("/api", { ok: text }).then(res => {
+        dispatch(addTodoItem(res.data));
+      });
+    }
   };
 };
 
@@ -32,6 +34,7 @@ export const getItemAction = todo => {
 export const getItem = () => {
   return dispatch => {
     axios.get("/api/item").then(result => {
+      console.log(result.data);
       dispatch(getItemAction(result.data));
     });
   };

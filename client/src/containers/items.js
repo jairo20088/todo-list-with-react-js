@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Item from "../component/item";
 import style from "styled-components";
-import * as actions from "../store/action";
+import * as actions from "../store/action/action";
 import { connect } from "react-redux";
 
 const ItemsContainer = style.div`
@@ -10,10 +10,13 @@ const ItemsContainer = style.div`
 `;
 
 const Items = props => {
-  const todos = ["Do homework", "Do Laundry", "Go to the gym"];
+  useEffect(() => {
+    props.onGetItemHandler();
+  }, []);
+
   return (
     <ItemsContainer>
-      {props.Items.map((todo, index) => (
+      {props.Item.map((todo, index) => (
         <Item
           task={todo.item}
           key={index}
@@ -26,13 +29,14 @@ const Items = props => {
 
 const mapStateToProps = state => {
   return {
-    todos: state.todos,
-    Items: state.Item
+    todos: state.addItems.todos,
+    Item: state.addItems.items
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteHandler: item => dispatch(actions.deleteItem(item))
+    onDeleteHandler: item => dispatch(actions.deleteItem(item)),
+    onGetItemHandler: () => dispatch(actions.getItem())
   };
 };
 

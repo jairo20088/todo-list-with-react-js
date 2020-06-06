@@ -6,7 +6,7 @@ exports.postItem = (req, res, next) => {
     item: req.body.ok
   })
     .then(result => {
-      res.send("connected");
+      res.json(result);
     })
     .catch(err => console.log(err));
 };
