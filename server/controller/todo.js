@@ -1,5 +1,13 @@
 const Todo = require("../modal/todo");
 
+exports.getItem = (req, res, next) => {
+  Todo.findAll()
+    .then(result => {
+      res.json(result);
+    })
+    .catch(err => console.log(err));
+};
+
 exports.postItem = (req, res, next) => {
   console.log(req.body);
   Todo.create({
@@ -11,10 +19,14 @@ exports.postItem = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.getItem = (req, res, next) => {
-  Todo.findAll()
+exports.postDeleteItem = (req, res, next) => {
+  const deletedItem = req.body.id;
+  console.log(deletedItem);
+  Todo.destroy({ where: { id: deletedItem } })
     .then(result => {
-      res.json(result);
+      console.log(result);
     })
     .catch(err => console.log(err));
+
+  next();
 };

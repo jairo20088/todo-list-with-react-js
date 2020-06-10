@@ -20,7 +20,7 @@ const Items = props => {
         <Item
           task={todo.item}
           key={index}
-          deleteItem={() => props.onDeleteHandler(index)}
+          deleteItem={() => props.onDeleteHandler(todo.id)}
         />
       ))}
     </ItemsContainer>

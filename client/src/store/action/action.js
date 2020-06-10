@@ -41,6 +41,7 @@ export const getItem = () => {
 };
 
 export const deleteItem = item => {
+  axios.delete("/item/delete", { data: { id: item } });
   return {
     type: actionTypes.DELETE_ITEM,
     deletedItem: item

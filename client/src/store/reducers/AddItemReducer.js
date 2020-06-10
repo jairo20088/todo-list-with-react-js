@@ -19,11 +19,11 @@ const getUserInput = (state, action) => {
 };
 
 const deleteItem = (state, action) => {
-  const todosDelete = [...state.todos];
+  const todosDelete = [...state.items];
   const newTodo = todosDelete.filter(
-    (el, index) => index !== action.deletedItem
+    (el, index) => el.id !== action.deletedItem
   );
-  return { ...state, todos: newTodo };
+  return { ...state, items: newTodo };
 };
 
 const reducer = (state = initialState, action) => {

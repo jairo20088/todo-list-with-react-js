@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Search from "../component/searcBar";
 import Button from "../component/button";
 import * as actions from "../store/action/action";
