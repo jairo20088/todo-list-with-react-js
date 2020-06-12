@@ -1,6 +1,6 @@
 import React from "react";
 import Search from "../component/searcBar";
-import Button from "../component/button";
+import Button from "../component/addButton";
 import * as actions from "../store/action/action";
 import { connect } from "react-redux";
 
