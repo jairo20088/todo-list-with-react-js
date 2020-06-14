@@ -1,6 +1,7 @@
 import React from "react";
 import style from "styled-components";
 import * as Button from "../component/buttons";
+import { withRouter } from "react-router-dom";
 
 const NavContainer = style.div`
     background-color:#fff;
@@ -11,12 +12,15 @@ const NavContainer = style.div`
 
 `;
 
-const Navegation = () => {
+const Navegation = props => {
   return (
     <NavContainer>
       <div>Logo</div>
       <div>
-        <Button.PrimaryButton style={{ marginRight: "2rem" }}>
+        <Button.PrimaryButton
+          style={{ marginRight: "2rem" }}
+          onClick={() => props.history.push("/login")}
+        >
           Login
         </Button.PrimaryButton>
         <Button.SecondaryButton>Register</Button.SecondaryButton>
@@ -24,4 +28,4 @@ const Navegation = () => {
     </NavContainer>
   );
 };
-export default Navegation;
+export default withRouter(Navegation);

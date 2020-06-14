@@ -2,11 +2,10 @@ import React from "react";
 import style from "styled-components";
 
 const InputText = style.input`
-      display:block;
       margin:1rem auto;
       height:5rem;
       font-size:2rem;
-      width:60rem;
+      width:35rem;
       outline:none;
       border-radius: .7rem;
       border:none;
@@ -20,17 +19,18 @@ const InputText = style.input`
       }
 
 
+
+
   `;
-const searchBar = props => {
+const Input = props => {
   return (
-    <div>
-      <InputText
-        type="text"
-        placeholder={props.placeHolder}
-        onChange={props.changed}
-        value={props.value}
-      />
-    </div>
+    <InputText
+      value={props.value}
+      type={props.type}
+      placeholder={props.placeholder}
+      onFocus={props.focus}
+      onBlur={props.unfocus}
+    />
   );
 };
-export default searchBar;
+export default Input;

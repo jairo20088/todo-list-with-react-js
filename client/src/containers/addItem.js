@@ -9,6 +9,7 @@ const AddItem = props => {
     <div>
       <Search
         changed={e => props.onChangeHandler(e.target.value)}
+        placeHolder="Add Item"
         value={props.userInput}
       />
       <Button

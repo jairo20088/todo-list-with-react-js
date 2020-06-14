@@ -9,7 +9,7 @@ exports.getItem = (req, res, next) => {
 };
 
 exports.postItem = (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   Todo.create({
     item: req.body.ok
   })
