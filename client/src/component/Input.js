@@ -1,5 +1,6 @@
 import React from "react";
 import style from "styled-components";
+import { checkPropTypes } from "prop-types";
 
 const InputText = style.input`
       margin:1rem auto;
@@ -25,6 +26,7 @@ const InputText = style.input`
 const Input = props => {
   return (
     <InputText
+      onChange={props.changed}
       value={props.value}
       type={props.type}
       placeholder={props.placeholder}

@@ -1,6 +1,6 @@
 import React from "react";
 import style from "styled-components";
-import * as Button from "../component/buttons";
+import * as Button from "../style/buttons";
 import { withRouter } from "react-router-dom";
 
 const NavContainer = style.div`
@@ -23,7 +23,9 @@ const Navegation = props => {
         >
           Login
         </Button.PrimaryButton>
-        <Button.SecondaryButton>Register</Button.SecondaryButton>
+        <Button.SecondaryButton onClick={() => props.history.push("/register")}>
+          Register
+        </Button.SecondaryButton>
       </div>
     </NavContainer>
   );

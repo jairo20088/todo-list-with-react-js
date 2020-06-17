@@ -1,26 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../component/Input";
-import style from "styled-components";
-import * as button from "../component/buttons";
-import axios from "axios";
-const Form = style.form`
-  display:flex;
-  flex-direction:column;
-  margin: 3rem auto;
-  align-items:center;
-  width:35rem;
 
-  &>div{
-    position:relative;
-  }
-`;
-const Label = style.label`
-  font-size:2rem;
-  z-index:10;
-  display:block;
-  color:#5a86bb;
+import * as button from "../style/buttons";
 
-`;
+import * as Form from "../style/form";
 
 const Login = () => {
   // const [emailFocus, setEmailFocus] = useState(false);
@@ -29,13 +12,13 @@ const Login = () => {
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Login</h2>
-      <Form>
+      <Form.Form>
         <div>
-          <Label>Email</Label>
+          <Form.Label>Email</Form.Label>
           <Input type="text" name="email" />
         </div>
         <div>
-          <Label>Password</Label>
+          <Form.Label>Password</Form.Label>
           <Input type="password" />
         </div>
         <button.PrimaryButton
@@ -44,7 +27,7 @@ const Login = () => {
         >
           Login
         </button.PrimaryButton>
-      </Form>
+      </Form.Form>
     </div>
   );
 };
