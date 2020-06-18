@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onChangeHandler: (identifier, value) =>
       dispatch(action.changeHandler(identifier, value)),
-    onPostDataHandler: userData => dispatch(action.postData(userData))
+    onPostDataHandler: userData => dispatch(action.postRegister(userData))
   };
 };
 

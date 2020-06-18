@@ -2,8 +2,7 @@ const User = require("../modal/user");
 
 exports.postLogin = (req, res, next) => {
   //console.log(req.body);
-  console.log(req.body);
-  res.redirect("/");
+  res.json(req.body);
 };
 exports.postRegister = (req, res, next) => {
   User.create({
