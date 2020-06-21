@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Item from "../component/item";
 import style from "styled-components";
-import * as actions from "../store/action/action";
+import * as actions from "../store/action/itemsAction";
 import { connect } from "react-redux";
 
 const ItemsContainer = style.div`

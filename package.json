@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jairo20088/todo-list-with-react-js#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",

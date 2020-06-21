@@ -1,6 +1,5 @@
 import React from "react";
 import style from "styled-components";
-import { checkPropTypes } from "prop-types";
 
 const InputText = style.input`
       margin:1rem auto;

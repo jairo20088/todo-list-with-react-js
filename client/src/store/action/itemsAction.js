@@ -17,7 +17,7 @@ export const addTodoItem = text => {
 export const addTodo = text => {
   return dispatch => {
     if (text) {
-      axios.post("/api", { ok: text }).then(res => {
+      axios.post("/add-item", { ok: text }).then(res => {
         dispatch(addTodoItem(res.data));
       });
     }

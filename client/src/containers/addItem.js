@@ -1,7 +1,8 @@
 import React from "react";
 import Search from "../component/searcBar";
 import Button from "../component/addButton";
-import * as actions from "../store/action/action";
+import * as actions from "../store/action/itemsAction";
+import Items from "./items";
 import { connect } from "react-redux";
 
 const AddItem = props => {
@@ -16,6 +17,7 @@ const AddItem = props => {
         label="Add"
         clicked={() => props.onAddItemHandler(props.userInput)}
       />
+      <Items />
     </div>
   );
 };
