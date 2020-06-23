@@ -9,7 +9,8 @@ const initialState = {
   login: {
     email: "",
     password: ""
-  }
+  },
+  error: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
       const login = { ...state.login };
       login[action.id] = action.data;
       return { ...state, login };
+    case actionTypes.LOGGING_ERROR:
+      return { ...state, error: action.error };
     default:
       return { ...state };
   }

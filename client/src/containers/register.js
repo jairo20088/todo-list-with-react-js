@@ -5,7 +5,7 @@ import * as button from "../style/buttons";
 
 import * as Form from "../style/form";
 import { connect } from "react-redux";
-import * as action from "../store/action/registerAction";
+import * as action from "../store/action/authAction";
 const Register = props => {
   // const [emailFocus, setEmailFocus] = useState(false);
   // const [passwordFocus, setPasswordFocus] = useState(false);
@@ -61,7 +61,7 @@ const Register = props => {
 
 const mapStateToProps = state => {
   return {
-    data: state.register.data
+    data: state.auth.data
   };
 };
 const mapDispatchToProps = dispatch => {

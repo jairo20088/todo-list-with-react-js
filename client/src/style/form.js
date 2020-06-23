@@ -3,7 +3,7 @@ import style from "styled-components";
 export const Form = style.div`
   display:flex;
   flex-direction:column;
-  margin: 3rem auto;
+  margin:  auto;
   align-items:center;
   width:35rem;
 

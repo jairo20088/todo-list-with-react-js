@@ -1,22 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import Input from "../component/Input";
-import * as action from "../store/action/registerAction";
+import * as action from "../store/action/authAction";
 import * as button from "../style/buttons";
-
+import style from "styled-components";
 import * as Form from "../style/form";
 
-const Login = props => {
-  // const [emailFocus, setEmailFocus] = useState(false);
-  // const [passwordFocus, setPasswordFocus] = useState(false);
+const ErrorText = style.p`
+  text-align:center;
+  font-size:1.7rem;
+  color:red;
+  margin-bottom:1rem;
 
+`;
+const Login = props => {
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Login</h2>
+      <ErrorText>{props.error ? props.error : null}</ErrorText>
       <Form.Form>
         <div>
           <Form.Label>Email</Form.Label>
           <Input
+            error={props.error}
             type="email"
             name="email"
             changed={e => props.onChangeHandler("email", e.target.value)}
@@ -43,7 +49,8 @@ const Login = props => {
 
 const mapStateToProps = state => {
   return {
-    data: state.register.login
+    data: state.auth.login,
+    error: state.auth.error
   };
 };
 const mapDispathToProps = dispatch => {
