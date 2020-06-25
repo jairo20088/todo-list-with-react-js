@@ -6,14 +6,13 @@ exports.postLogin = (req, res, next) => {
     if (user) {
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (result) {
-          console.log("User Logged in ");
+          res.json({ loggedIn: "user logged in" });
         } else {
-          console.log("Invalid password");
+          res.json({ invalid: "Email or Password is incorrect" });
         }
       });
     }
   });
-  res.json(req.body);
 };
 exports.postRegister = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })

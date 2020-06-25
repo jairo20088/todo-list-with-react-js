@@ -5,3 +5,5 @@ export const DELETE_ITEM = "DELETE_ITEM";
 export const ADD_REGISTER_INPUT = "ADD_REGISTER_INPUT";
 export const ADD_LOGIN_INPUT = "ADD_LOGIN_INPUT";
 export const LOGGING_ERROR = "LOGGING_ERROR";
+
+export const USER_IS_LOGGEDIN = "USER_IS_LOGGEDIN";

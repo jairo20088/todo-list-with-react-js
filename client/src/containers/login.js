@@ -38,7 +38,7 @@ const Login = props => {
         <button.PrimaryButton
           style={{ alignSelf: "end", fontSize: "2rem", marginTop: "1rem" }}
           type="submit"
-          onClick={() => props.onPostLogin(props.data)}
+          onClick={() => props.onPostLogin(props.data, props.history)}
         >
           Login
         </button.PrimaryButton>
@@ -55,7 +55,7 @@ const mapStateToProps = state => {
 };
 const mapDispathToProps = dispatch => {
   return {
-    onPostLogin: login => dispatch(action.postLogin(login)),
+    onPostLogin: (login, history) => dispatch(action.postLogin(login, history)),
     onChangeHandler: (identifier, value) =>
       dispatch(action.changeLoginHandler(identifier, value))
   };

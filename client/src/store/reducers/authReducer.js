@@ -10,7 +10,8 @@ const initialState = {
     email: "",
     password: ""
   },
-  error: ""
+  error: "",
+  isLoggedIn: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,8 +26,17 @@ const reducer = (state = initialState, action) => {
       const login = { ...state.login };
       login[action.id] = action.data;
       return { ...state, login };
+    // password or email error
     case actionTypes.LOGGING_ERROR:
       return { ...state, error: action.error };
+    // set user login blank
+    case actionTypes.USER_IS_LOGGEDIN:
+      return {
+        ...state,
+        error: "",
+        login: { ...state.login, email: "", password: "" },
+        isLoggedIn: true
+      };
     default:
       return { ...state };
   }
