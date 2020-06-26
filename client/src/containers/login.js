@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Input from "../component/Input";
-import * as action from "../store/action/authAction";
+import * as action from "../store/action/index";
 import * as button from "../style/buttons";
 import style from "styled-components";
 import * as Form from "../style/form";
@@ -31,6 +31,7 @@ const Login = props => {
         <div>
           <Form.Label>Password</Form.Label>
           <Input
+            error={props.error}
             type="password"
             changed={e => props.onChangeHandler("password", e.target.value)}
           />
@@ -38,7 +39,7 @@ const Login = props => {
         <button.PrimaryButton
           style={{ alignSelf: "end", fontSize: "2rem", marginTop: "1rem" }}
           type="submit"
-          onClick={() => props.onPostLogin(props.data, props.history)}
+          onClick={() => props.onPostLogin(props.data, props)}
         >
           Login
         </button.PrimaryButton>
@@ -55,7 +56,8 @@ const mapStateToProps = state => {
 };
 const mapDispathToProps = dispatch => {
   return {
-    onPostLogin: (login, history) => dispatch(action.postLogin(login, history)),
+    onPostLogin: (login, allProps) =>
+      dispatch(action.postLogin(login, allProps)),
     onChangeHandler: (identifier, value) =>
       dispatch(action.changeLoginHandler(identifier, value))
   };

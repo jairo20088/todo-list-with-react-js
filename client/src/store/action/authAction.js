@@ -2,26 +2,11 @@ import * as actionTypes from "./actionTypes";
 
 import axios from "axios";
 
-export const changeHandler = (identifier, fields) => {
-  return {
-    type: actionTypes.ADD_REGISTER_INPUT,
-    id: identifier,
-    data: fields
-  };
-};
 export const changeLoginHandler = (identifier, fields) => {
   return {
     type: actionTypes.ADD_LOGIN_INPUT,
     id: identifier,
     data: fields
-  };
-};
-
-export const postRegister = userData => {
-  return dispatch => {
-    axios.post("/register", userData).then(res => {
-      console.log(res);
-    });
   };
 };
 
@@ -38,12 +23,12 @@ export const loggedIn = () => {
   };
 };
 
-export const postLogin = (login, history) => {
+export const postLogin = (login, props) => {
   return dispatch => {
     const regex = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
     if (!regex.test(login.email)) {
-      return dispatch(error("Invalid email"));
+      return dispatch(error("Email or Password is incorrect"));
     }
     axios
       .post("/auth", login)
@@ -52,7 +37,7 @@ export const postLogin = (login, history) => {
           return dispatch(error(res.data.invalid));
         }
         dispatch(loggedIn());
-        history.push("/");
+        props.history.push("/");
       })
       .catch(err => {
         throw new Error("Error has occured on the server");

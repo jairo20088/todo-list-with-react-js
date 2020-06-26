@@ -5,7 +5,8 @@ import * as button from "../style/buttons";
 
 import * as Form from "../style/form";
 import { connect } from "react-redux";
-import * as action from "../store/action/authAction";
+
+import * as action from "../store/action/index";
 const Register = props => {
   // const [emailFocus, setEmailFocus] = useState(false);
   // const [passwordFocus, setPasswordFocus] = useState(false);
@@ -17,6 +18,7 @@ const Register = props => {
         <div>
           <Form.Label>Name</Form.Label>
           <Input
+            isRequired={true}
             type="text"
             changed={e => props.onChangeHandler("name", e.target.value)}
             value={props.data.name}
@@ -50,7 +52,7 @@ const Register = props => {
         </div>
         <button.PrimaryButton
           style={{ alignSelf: "end", fontSize: "2rem", marginTop: "1rem" }}
-          onClick={() => props.onPostDataHandler(props.data)}
+          onClick={() => props.onPostDataHandler(props.data, props)}
         >
           Register
         </button.PrimaryButton>
@@ -61,14 +63,15 @@ const Register = props => {
 
 const mapStateToProps = state => {
   return {
-    data: state.auth.data
+    data: state.register.data
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     onChangeHandler: (identifier, value) =>
       dispatch(action.changeHandler(identifier, value)),
-    onPostDataHandler: userData => dispatch(action.postRegister(userData))
+    onPostDataHandler: (userData, allProps) =>
+      dispatch(action.postRegister(userData, allProps))
   };
 };
 
