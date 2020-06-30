@@ -22,8 +22,13 @@ const reducer = (state = initialState, action) => {
       data[action.id] = action.data;
       return { ...state, data };
     case actionTypes.REGISTER_USER_ERROR:
+      console.log(action.errors);
       const errors = { ...state.error };
-      errors[action.id] = action.error;
+      errors["name"] = action.errors.name;
+      errors["email"] = action.errors.email;
+      errors["password"] = action.errors.password;
+      errors["confirmPassword"] = action.errors.confirmPassword;
+
       return { ...state, ...errors };
     default:
       return { ...state };
