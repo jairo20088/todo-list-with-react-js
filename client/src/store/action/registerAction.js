@@ -22,7 +22,8 @@ export const postRegister = (userData, props) => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    alreadyExist: ""
   };
 
   return dispatch => {
@@ -44,7 +45,7 @@ export const postRegister = (userData, props) => {
           "At least 1 capital letter, 1 lower letter and number";
       } else {
         if (userData.password !== userData.confirmPassword) {
-          dataError["password"] = "Passwords don't match";
+          dataError["confirmPassword"] = "Passwords don't match";
         }
       }
     }
@@ -55,7 +56,11 @@ export const postRegister = (userData, props) => {
     }
     axios.post("/register", userData).then(res => {
       console.log(res);
-      props.history.push("/login");
+      dataError["alreadyExist"] = res.data.error;
+      dispatch(registerError(dataError));
+      if (!res.data.error) {
+        props.history.push("/login");
+      }
     });
   };
 };

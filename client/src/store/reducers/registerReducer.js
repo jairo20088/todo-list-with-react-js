@@ -6,12 +6,7 @@ const initialState = {
     password: "",
     confirmPassword: ""
   },
-  error: {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  }
+  error: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,14 +17,14 @@ const reducer = (state = initialState, action) => {
       data[action.id] = action.data;
       return { ...state, data };
     case actionTypes.REGISTER_USER_ERROR:
-      console.log(action.errors);
-      const errors = { ...state.error };
-      errors["name"] = action.errors.name;
-      errors["email"] = action.errors.email;
-      errors["password"] = action.errors.password;
-      errors["confirmPassword"] = action.errors.confirmPassword;
+      //console.log(action.errors);
+      // const errors = { ...state.error };
+      // errors["name"] = action.errors.name;
+      // errors["email"] = action.errors.email;
+      // errors["password"] = action.errors.password;
+      // errors["confirmPassword"] = action.errors.confirmPassword;
 
-      return { ...state, ...errors };
+      return { ...state, error: action.errors };
     default:
       return { ...state };
   }
