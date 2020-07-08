@@ -1,18 +1,39 @@
 const User = require("../modal/user");
+const {validationResult} = require("express-validator");
 const bcrypt = require("bcrypt");
 
 exports.postLogin = (req, res, next) => {
-  User.findOne({ where: { email: req.body.email } }).then(user => {
-    if (user) {
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
-        if (result) {
-          res.json({ loggedIn: "user logged in" });
-        } else {
-          res.json({ invalid: "Email or Password is incorrect" });
-        }
-      });
+ const errors = validationResult(req)
+ let listOfErros = []
+
+  //if user send a bad email
+  if(errors.errors.length !== 0){
+
+    listOfErros=errors.errors.map(el => {
+      return el.msg
+    });
+    if(errors.errors.length > 1){
+      listOfErros = listOfErros.join(' and ');
+    }else{
+      listOfErros = listOfErros.join('')
     }
-  });
+    return res.json({invalid:listOfErros})
+  }
+  // if all fields are corrent
+  else{
+    console.log("rererere")
+    User.findOne({ where: { email: req.body.email } }).then(user => {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (result) {
+            res.json({ loggedIn: "user logged in" });
+          } else {
+            res.json({ invalid: "Invalid email or password" });
+          }
+        });
+      }
+    });
+  }
 };
 exports.postRegister = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
