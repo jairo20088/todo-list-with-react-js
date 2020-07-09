@@ -9,6 +9,15 @@ route.post("/auth",[
     body("password").isLength(6).withMessage("Invalid password")
 
 ] ,authController.postLogin);
-route.post("/register", authController.postRegister);
+route.post("/register",[
+
+    body("email").isEmail().trim().withMessage("Invalid email"),
+    body("password").isLength(6).withMessage("invalid password"),
+    body("confirmPassword").isLength(6).withMessage("Invalid password"),
+    body("name").not().isEmpty().withMessage("Name is required")
+
+
+
+] ,authController.postRegister);
 
 module.exports = route;

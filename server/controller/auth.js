@@ -36,6 +36,21 @@ exports.postLogin = (req, res, next) => {
   }
 };
 exports.postRegister = (req, res, next) => {
+  const errors = validationResult(req);
+  let listOfErros = [];
+  //console.log(errors)
+
+  if(errors.errors.length > 0){
+    listOfErros=errors.errors.map(el => {
+      return el.msg
+    });
+  }
+  console.log(listOfErros)
+  if(listOfErros.length >0){
+    return res.json({errors:listOfErros})
+  }
+
+
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (user) {
