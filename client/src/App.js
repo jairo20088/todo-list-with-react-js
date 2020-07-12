@@ -11,6 +11,7 @@ function App() {
       <Route exact path="/" component={AddItem} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path = "/klk/:id" component = {Login}/>
     </div>
   );
 }

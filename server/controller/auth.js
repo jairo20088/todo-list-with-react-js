@@ -1,27 +1,25 @@
 const User = require("../modal/user");
-const {validationResult} = require("express-validator");
+const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 
 exports.postLogin = (req, res, next) => {
- const errors = validationResult(req)
- let listOfErros = []
+  const errors = validationResult(req);
+  let listOfErros = [];
 
   //if user send a bad email
-  if(errors.errors.length !== 0){
-
-    listOfErros=errors.errors.map(el => {
-      return el.msg
+  if (errors.errors.length !== 0) {
+    listOfErros = errors.errors.map(el => {
+      return el.msg;
     });
-    if(errors.errors.length > 1){
-      listOfErros = listOfErros.join(' and ');
-    }else{
-      listOfErros = listOfErros.join('')
+    if (errors.errors.length > 1) {
+      listOfErros = listOfErros.join(" and ");
+    } else {
+      listOfErros = listOfErros.join("");
     }
-    return res.json({invalid:listOfErros})
+    return res.json({ invalid: listOfErros });
   }
   // if all fields are corrent
-  else{
-    console.log("rererere")
+  else {
     User.findOne({ where: { email: req.body.email } }).then(user => {
       if (user) {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -38,23 +36,21 @@ exports.postLogin = (req, res, next) => {
 exports.postRegister = (req, res, next) => {
   const errors = validationResult(req);
   let listOfErros = [];
-  //console.log(errors)
 
-  if(errors.errors.length > 0){
-    listOfErros=errors.errors.map(el => {
-      return el.msg
+  if (errors.errors.length !== 0) {
+    listOfErros = errors.errors.map(el => {
+      return el;
     });
   }
-  console.log(listOfErros)
-  if(listOfErros.length >0){
-    return res.json({errors:listOfErros})
+  console.log(listOfErros);
+  if (listOfErros.length > 0) {
+    return res.json({ errors: listOfErros });
   }
-
 
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (user) {
-        return res.json({ error: "Email already exist" });
+        return res.json({ emailExist: "Email already exist" });
       }
       if (req.body.password == req.body.confirmPassword) {
         return bcrypt.hash(req.body.password, 10).then(password => {
@@ -65,7 +61,7 @@ exports.postRegister = (req, res, next) => {
           });
         });
       } else {
-        return res.json({ error: "Invalid password" });
+        return res.json({ error: "Passwords don't match" });
       }
     })
     .then(result => {
