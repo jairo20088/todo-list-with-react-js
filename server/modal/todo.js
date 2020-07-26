@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../util/database");
 
-const todo = sequelize.define("blog", {
+const todo = sequelize.define("todo", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,

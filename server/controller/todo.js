@@ -1,7 +1,7 @@
 const Todo = require("../modal/todo");
 
 exports.getItem = (req, res, next) => {
-  Todo.findAll()
+  Todo.findAll({ where: { userId: req.session.user.id } })
     .then(result => {
       res.json(result);
     })
@@ -9,11 +9,13 @@ exports.getItem = (req, res, next) => {
 };
 
 exports.postItem = (req, res, next) => {
-  //console.log(req.body);
-  Todo.create({
-    item: req.body.ok
-  })
+  console.log(req.user);
+  req.user
+    .createTodo({
+      item: req.body.ok
+    })
     .then(result => {
+      console.log(req.cookies);
       res.json(result);
     })
     .catch(err => console.log(err));

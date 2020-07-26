@@ -24,6 +24,9 @@ exports.postLogin = (req, res, next) => {
       if (user) {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (result) {
+            req.session.user = user;
+            req.session.save();
+
             res.json({ loggedIn: "user logged in" });
           } else {
             res.json({ invalid: "Invalid email or password" });

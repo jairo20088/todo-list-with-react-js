@@ -33,7 +33,7 @@ export const getItemAction = todo => {
 
 export const getItem = () => {
   return dispatch => {
-    axios.get("/api/item").then(result => {
+    axios.get("/api/item", { withCredentials: true }).then(result => {
       console.log(result.data);
       dispatch(getItemAction(result.data));
     });
