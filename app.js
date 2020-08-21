@@ -13,23 +13,28 @@ const options = {
   host: "localhost",
   user: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME
+  database: process.env.DATABASE_NAME,
+  clearExpired: true,
+  checkExpirationInterval: 2000
 };
 
 const store = new MySQLStore(options);
 
 const app = express();
-
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE");
+  //res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  next();
+});
 app.use(
   session({
     secret: process.env.SECRET_PASSWORD,
     resave: false,
     saveUninitialized: false,
     store: store,
-    expiration: 86400000,
-    clearExpired: true,
     cookie: {
-      expires: 600000
+      expires: 900000
     }
   })
 );

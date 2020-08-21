@@ -1,6 +1,12 @@
 export { changeHandler, postRegister } from "./registerAction";
 
-export { changeLoginHandler, error, loggedIn, postLogin } from "./authAction";
+export {
+  changeLoginHandler,
+  error,
+  loggedIn,
+  postLogin,
+  logout
+} from "./authAction";
 
 export {
   userInput,

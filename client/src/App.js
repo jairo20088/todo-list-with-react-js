@@ -1,19 +1,29 @@
 import React from "react";
 import AddItem from "./containers/addItem";
 import Navegation from "./containers/navegation";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Login from "./containers/login";
 import Register from "./containers/register";
-function App() {
+import { connect } from "react-redux";
+function App(props) {
+  console.log(props);
   return (
     <div className="App">
       <Navegation />
-      <Route exact path="/" component={AddItem} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/klk/:id" component={Login} />
+      {props.isLogged ? (
+        <Route exact path="/" component={AddItem} />
+      ) : (
+        <Redirect to="/login" />
+      )}
+
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
     </div>
   );
 }
-
-export default App;
+const mapStateToProps = state => {
+  return {
+    isLogged: state.auth.isLoggedIn
+  };
+};
+export default connect(mapStateToProps)(App);

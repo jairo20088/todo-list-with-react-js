@@ -14,8 +14,6 @@ const ErrorText = style.p`
 
 `;
 const Login = props => {
-  const klk = props;
-
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Login</h2>

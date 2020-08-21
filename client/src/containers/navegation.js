@@ -2,6 +2,8 @@ import React from "react";
 import style from "styled-components";
 import * as Button from "../style/buttons";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as action from "../store/action/index";
 
 const NavContainer = style.div`
     background-color:#fff;
@@ -13,22 +15,49 @@ const NavContainer = style.div`
 `;
 
 const Navegation = props => {
+  const Buttons = (
+    <div>
+      <Button.PrimaryButton
+        style={{ marginRight: "2rem" }}
+        onClick={() => props.history.push("/login")}
+      >
+        Login
+      </Button.PrimaryButton>
+      <Button.SecondaryButton onClick={() => props.history.push("/register")}>
+        Register
+      </Button.SecondaryButton>
+    </div>
+  );
+  const LoggedOutButton = (
+    <div>
+      <Button.PrimaryButton
+        style={{ marginRight: "2rem" }}
+        onClick={() => props.logoutHandler()}
+      >
+        Logout
+      </Button.PrimaryButton>
+    </div>
+  );
+
   return (
     <NavContainer>
       <div>Logo</div>
-      <div>
-        <Button.PrimaryButton
-          style={{ marginRight: "2rem" }}
-          onClick={() => props.history.push("/login")}
-        >
-          Login
-        </Button.PrimaryButton>
-        <Button.SecondaryButton onClick={() => props.history.push("/register")}>
-          Register
-        </Button.SecondaryButton>
-      </div>
-      <a href = "klk">klkl</a>
+      {props.logged ? LoggedOutButton : Buttons}
     </NavContainer>
   );
 };
-export default withRouter(Navegation);
+const mapStateToProps = state => {
+  return {
+    logged: state.auth.isLoggedIn
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutHandler: () => dispatch(action.logout())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Navegation));

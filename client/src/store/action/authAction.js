@@ -44,3 +44,20 @@ export const postLogin = (login, props) => {
       });
   };
 };
+export const logoutAction = () => {
+  return {
+    type: actionTypes.USER_LOGOUT
+  };
+};
+export const logout = () => {
+  return dispatch => {
+    axios
+      .post("/logout", { message: "logout" })
+      .then(re => {
+        console.log(re);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+};

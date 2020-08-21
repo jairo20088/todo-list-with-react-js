@@ -37,5 +37,6 @@ route.post(
   ],
   authController.postRegister
 );
+route.post("/logout", authController.postLogout);
 
 module.exports = route;

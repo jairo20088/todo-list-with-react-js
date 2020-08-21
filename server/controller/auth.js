@@ -26,7 +26,6 @@ exports.postLogin = (req, res, next) => {
           if (result) {
             req.session.user = user;
             req.session.save();
-
             res.json({ loggedIn: "user logged in" });
           } else {
             res.json({ invalid: "Invalid email or password" });
@@ -70,5 +69,11 @@ exports.postRegister = (req, res, next) => {
     .then(result => {
       res.json(req.body);
     })
-    .catch(err => "Error has occure");
+    .catch(err => "Error has occured");
+};
+exports.postLogout = (req, res, next) => {
+  req.session.destroy();
+  console.log("destroy session");
+  res.json({ message: "logged out" });
+  next();
 };

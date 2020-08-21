@@ -10,6 +10,7 @@ exports.getItem = (req, res, next) => {
 
 exports.postItem = (req, res, next) => {
   console.log(req.user);
+  console.log(req.body);
   req.user
     .createTodo({
       item: req.body.ok

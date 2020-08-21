@@ -26,6 +26,9 @@ const reducer = (state = initialState, action) => {
         login: { ...state.login, email: "", password: "" },
         isLoggedIn: true
       };
+    case actionTypes.USER_LOGOUT: {
+      return { ...state };
+    }
     default:
       return { ...state };
   }
