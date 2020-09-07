@@ -1,4 +1,5 @@
 import * as actionTypes from "../action/actionTypes";
+import cookie from "react-cookies";
 const initialState = {
   login: {
     email: "",
@@ -27,7 +28,8 @@ const reducer = (state = initialState, action) => {
         isLoggedIn: true
       };
     case actionTypes.USER_LOGOUT: {
-      return { ...state };
+      cookie.remove("token");
+      return { ...state, isLoggedIn: false };
     }
     default:
       return { ...state };

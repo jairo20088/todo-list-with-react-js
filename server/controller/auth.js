@@ -26,7 +26,7 @@ exports.postLogin = (req, res, next) => {
           if (result) {
             req.session.user = user;
             req.session.save();
-            res.json({ loggedIn: "user logged in" });
+            res.json({ loggedIn: "user logged in", token: "jose123123" });
           } else {
             res.json({ invalid: "Invalid email or password" });
           }

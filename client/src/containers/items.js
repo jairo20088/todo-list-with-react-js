@@ -10,6 +10,7 @@ const ItemsContainer = style.div`
 `;
 
 const Items = props => {
+  console.log("running")
   useEffect(() => {
     props.onGetItemHandler();
   }, []);

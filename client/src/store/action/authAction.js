@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
-
+import cookie from "react-cookies";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 export const changeLoginHandler = (identifier, fields) => {
@@ -36,7 +37,11 @@ export const postLogin = (login, props) => {
         if (res.data.invalid) {
           return dispatch(error(res.data.invalid));
         }
+
+        var token = res.data.token;
+
         dispatch(loggedIn());
+        cookie.save("token", token);
         props.history.push("/");
       })
       .catch(err => {
@@ -49,12 +54,17 @@ export const logoutAction = () => {
     type: actionTypes.USER_LOGOUT
   };
 };
-export const logout = () => {
+export const logout = (props) => {
   return dispatch => {
     axios
       .post("/logout", { message: "logout" })
       .then(re => {
-        console.log(re);
+        dispatch(logoutAction());
+        props.history.push("/login");
+        // const history = useHistory();
+        // history.push({
+        //   pathname: '/',
+        // });
       })
       .catch(e => {
         console.log(e);

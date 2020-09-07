@@ -32,7 +32,7 @@ const Navegation = props => {
     <div>
       <Button.PrimaryButton
         style={{ marginRight: "2rem" }}
-        onClick={() => props.logoutHandler()}
+        onClick={() => props.logoutHandler(props)}
       >
         Logout
       </Button.PrimaryButton>
@@ -53,7 +53,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    logoutHandler: () => dispatch(action.logout())
+    logoutHandler: (props) => dispatch(action.logout(props))
   };
 };
 

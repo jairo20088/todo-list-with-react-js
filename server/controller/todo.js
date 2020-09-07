@@ -1,6 +1,8 @@
 const Todo = require("../modal/todo");
 
 exports.getItem = (req, res, next) => {
+  console.log(req)
+  console.log(req.session);
   Todo.findAll({ where: { userId: req.session.user.id } })
     .then(result => {
       res.json(result);
