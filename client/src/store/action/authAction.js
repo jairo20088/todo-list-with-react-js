@@ -1,8 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import cookie from "react-cookies";
-import { useHistory } from "react-router";
 import axios from "axios";
-
+import * as action from "./index";
 export const changeLoginHandler = (identifier, fields) => {
   return {
     type: actionTypes.ADD_LOGIN_INPUT,
@@ -37,12 +36,12 @@ export const postLogin = (login, props) => {
         if (res.data.invalid) {
           return dispatch(error(res.data.invalid));
         }
-
         var token = res.data.token;
-
+        action.getItem();
         dispatch(loggedIn());
         cookie.save("token", token);
-        props.history.push("/");
+
+        return props.history.push("/");
       })
       .catch(err => {
         throw new Error("Error has occured on the server");
@@ -54,7 +53,7 @@ export const logoutAction = () => {
     type: actionTypes.USER_LOGOUT
   };
 };
-export const logout = (props) => {
+export const logout = props => {
   return dispatch => {
     axios
       .post("/logout", { message: "logout" })

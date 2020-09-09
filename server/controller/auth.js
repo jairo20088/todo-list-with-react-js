@@ -31,6 +31,8 @@ exports.postLogin = (req, res, next) => {
             res.json({ invalid: "Invalid email or password" });
           }
         });
+      } else {
+        res.json({ invalid: "email do not exist" });
       }
     });
   }

@@ -10,8 +10,8 @@ const ItemsContainer = style.div`
 `;
 
 const Items = props => {
-  console.log("running")
   useEffect(() => {
+    console.log("Items Component");
     props.onGetItemHandler();
   }, []);
 
@@ -31,7 +31,8 @@ const Items = props => {
 const mapStateToProps = state => {
   return {
     todos: state.addItems.todos,
-    Item: state.addItems.items
+    Item: state.addItems.items,
+    isLogged: state.auth.isLoggedIn
   };
 };
 const mapDispatchToProps = dispatch => {
