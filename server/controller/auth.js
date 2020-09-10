@@ -1,6 +1,7 @@
 const User = require("../modal/user");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.postLogin = (req, res, next) => {
   const errors = validationResult(req);
@@ -26,7 +27,16 @@ exports.postLogin = (req, res, next) => {
           if (result) {
             req.session.user = user;
             req.session.save();
-            res.json({ loggedIn: "user logged in", token: "jose123123" });
+
+            var token = jwt.sign(
+              {
+                userId: user.id,
+                email: user.email
+              },
+              process.env.JWT_SECRET_PASSWORD
+            );
+            //console.log(token);
+            res.json({ loggedIn: "user logged in", token: token });
           } else {
             res.json({ invalid: "Invalid email or password" });
           }

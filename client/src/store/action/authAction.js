@@ -39,6 +39,7 @@ export const postLogin = (login, props) => {
         var token = res.data.token;
         action.getItem();
         dispatch(loggedIn());
+        console.log(token);
         cookie.save("token", token);
 
         return props.history.push("/");

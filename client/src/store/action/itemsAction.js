@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import cookie from "react-cookies";
 import axios from "axios";
 
 export const userInput = inputText => {
@@ -15,11 +16,19 @@ export const addTodoItem = text => {
   };
 };
 export const addTodo = text => {
+  var token = cookie.load("token");
   return dispatch => {
     if (text) {
-      axios.post("/add-item", { ok: text }).then(res => {
-        dispatch(addTodoItem(res.data));
-      });
+      axios
+        .post(
+          "/add-item",
+          { ok: text },
+          { headers: { autorizacion: "Bearer " + token } }
+        )
+        .then(res => {
+          console.log(res);
+          dispatch(addTodoItem(res.data));
+        });
     }
   };
 };
@@ -32,16 +41,23 @@ export const getItemAction = todo => {
 };
 
 export const getItem = () => {
+  var token = cookie.load("token");
   return dispatch => {
-    axios.get("/api/item", { withCredentials: true }).then(result => {
-      console.log(result.data);
-      dispatch(getItemAction(result.data));
-    });
+    axios
+      .get("/api/item", { headers: { Authorization: "Bearer " + token } })
+      .then(result => {
+        console.log(result.data);
+        dispatch(getItemAction(result.data));
+      });
   };
 };
 
 export const deleteItem = item => {
-  axios.delete("/item/delete", { data: { id: item } });
+  var token = cookie.load("token");
+  axios.delete("/item/delete", {
+    headers: { Authorization: "Bearer " + token },
+    data: { id: item }
+  });
   return {
     type: actionTypes.DELETE_ITEM,
     deletedItem: item
