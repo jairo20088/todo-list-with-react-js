@@ -10,9 +10,8 @@ import cookie from "react-cookies";
 function App(props) {
   useEffect(() => {
     if (cookie.load("token") === undefined) {
-      console.log("cookie Undefiend");
+      props.history.push("/login");
     } else {
-      console.log("loogged in ");
       props.userAuthenticationHandler();
       props.history.push("/");
     }

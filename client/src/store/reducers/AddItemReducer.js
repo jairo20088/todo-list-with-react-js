@@ -25,6 +25,9 @@ const deleteItem = (state, action) => {
   );
   return { ...state, items: newTodo };
 };
+const clearItems = (state, action) => {
+  return { ...state, items: [] };
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,6 +42,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.GET_TODO:
       return getItem(state, action);
+    case actionTypes.CLEAR_ITEM: {
+      return clearItems(state, action);
+    }
     default:
       return { ...state };
   }

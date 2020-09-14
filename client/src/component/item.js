@@ -49,7 +49,7 @@ const item = ({ task, deleteItem, doneItem, editItem }) => {
           <Controls>
             <Image src={deleteBottom} onClick={deleteItem} />
             <Image src={checkedBottom} onClick={doneItem} />
-            <Image src={editBottom} onClick={editItem} />
+            {/* <Image src={editBottom} onClick={editItem} /> */}
           </Controls>
           <div>{task}</div>
         </Item>

@@ -36,12 +36,9 @@ export const postLogin = (login, props) => {
         if (res.data.invalid) {
           return dispatch(error(res.data.invalid));
         }
-        var token = res.data.token;
-        action.getItem();
         dispatch(loggedIn());
-        console.log(token);
+        const token = res.data.token;
         cookie.save("token", token);
-
         return props.history.push("/");
       })
       .catch(err => {
@@ -60,11 +57,8 @@ export const logout = props => {
       .post("/logout", { message: "logout" })
       .then(re => {
         dispatch(logoutAction());
+        dispatch(action.clearItem());
         props.history.push("/login");
-        // const history = useHistory();
-        // history.push({
-        //   pathname: '/',
-        // });
       })
       .catch(e => {
         console.log(e);

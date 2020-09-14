@@ -15,7 +15,8 @@ const options = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
   clearExpired: true,
-  checkExpirationInterval: 2000
+  checkExpirationInterval: 2000,
+  expiration: 9000
 };
 
 const store = new MySQLStore(options);
@@ -29,12 +30,13 @@ app.use((req, res, next) => {
 });
 app.use(
   session({
+    key: "sessId",
     secret: process.env.SECRET_PASSWORD,
     resave: false,
     saveUninitialized: false,
     store: store,
     cookie: {
-      expires: 900000
+      expires: 86400000
     }
   })
 );

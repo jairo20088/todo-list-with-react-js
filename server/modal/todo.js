@@ -11,6 +11,11 @@ const todo = sequelize.define("todo", {
   item: {
     type: Sequelize.TEXT("longtext"),
     allowNull: false
+  },
+  isDone: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   }
 });
 module.exports = todo;

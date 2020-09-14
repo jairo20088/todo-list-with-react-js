@@ -23,7 +23,7 @@ export const addTodo = text => {
         .post(
           "/add-item",
           { ok: text },
-          { headers: { autorizacion: "Bearer " + token } }
+          { headers: { authorization: "Bearer " + token } }
         )
         .then(res => {
           console.log(res);
@@ -39,6 +39,11 @@ export const getItemAction = todo => {
     todos: todo
   };
 };
+export const clearItem = () => {
+  return {
+    type: actionTypes.CLEAR_ITEM
+  };
+};
 
 export const getItem = () => {
   var token = cookie.load("token");
@@ -46,7 +51,6 @@ export const getItem = () => {
     axios
       .get("/api/item", { headers: { Authorization: "Bearer " + token } })
       .then(result => {
-        console.log(result.data);
         dispatch(getItemAction(result.data));
       });
   };
@@ -58,6 +62,7 @@ export const deleteItem = item => {
     headers: { Authorization: "Bearer " + token },
     data: { id: item }
   });
+
   return {
     type: actionTypes.DELETE_ITEM,
     deletedItem: item

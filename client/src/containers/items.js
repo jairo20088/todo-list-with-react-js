@@ -11,7 +11,6 @@ const ItemsContainer = style.div`
 
 const Items = props => {
   useEffect(() => {
-    console.log("Items Component");
     props.onGetItemHandler();
   }, []);
 

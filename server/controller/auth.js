@@ -35,7 +35,7 @@ exports.postLogin = (req, res, next) => {
               },
               process.env.JWT_SECRET_PASSWORD
             );
-            //console.log(token);
+            console.log(token);
             res.json({ loggedIn: "user logged in", token: token });
           } else {
             res.json({ invalid: "Invalid email or password" });
@@ -56,7 +56,6 @@ exports.postRegister = (req, res, next) => {
       return el;
     });
   }
-  console.log(listOfErros);
   if (listOfErros.length > 0) {
     return res.json({ errors: listOfErros });
   }
@@ -85,7 +84,6 @@ exports.postRegister = (req, res, next) => {
 };
 exports.postLogout = (req, res, next) => {
   req.session.destroy();
-  console.log("destroy session");
   res.json({ message: "logged out" });
   next();
 };

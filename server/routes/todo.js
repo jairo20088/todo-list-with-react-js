@@ -1,9 +1,10 @@
 const express = require("express");
 const route = express.Router();
 const todoController = require("../controller/todo");
+const isAuth = require("../middleware/isAuth");
 
-route.get("/api/item", todoController.getItem);
-route.post("/add-item", todoController.postItem);
-route.delete("/item/delete", todoController.postDeleteItem);
+route.get("/api/item", isAuth, todoController.getItem);
+route.post("/add-item", isAuth, todoController.postItem);
+route.delete("/item/delete", isAuth, todoController.postDeleteItem);
 
 module.exports = route;
