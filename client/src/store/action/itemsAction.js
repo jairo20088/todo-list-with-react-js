@@ -26,7 +26,6 @@ export const addTodo = text => {
           { headers: { authorization: "Bearer " + token } }
         )
         .then(res => {
-          console.log(res);
           dispatch(addTodoItem(res.data));
         });
     }
@@ -49,7 +48,7 @@ export const getItem = () => {
   var token = cookie.load("token");
   return dispatch => {
     axios
-      .get("/api/item", { headers: { Authorization: "Bearer " + token } })
+      .get("/api/item", { headers: { authorization: "Bearer " + token } })
       .then(result => {
         dispatch(getItemAction(result.data));
       });
@@ -59,12 +58,27 @@ export const getItem = () => {
 export const deleteItem = item => {
   var token = cookie.load("token");
   axios.delete("/item/delete", {
-    headers: { Authorization: "Bearer " + token },
+    headers: { authorization: "Bearer " + token },
     data: { id: item }
   });
 
   return {
     type: actionTypes.DELETE_ITEM,
     deletedItem: item
+  };
+};
+
+export const ItemDone = item => {
+  var token = cookie.load("token");
+  return dispatch => {
+    axios
+      .post(
+        "/item/done",
+        { item: item },
+        { headers: { authorization: "Bearer " + token } }
+      )
+      .then(res => {
+        console.log(res);
+      });
   };
 };

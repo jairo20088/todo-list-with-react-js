@@ -15,7 +15,7 @@ const todo = sequelize.define("todo", {
   isDone: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: true
+    defaultValue: false
   }
 });
 module.exports = todo;

@@ -1,5 +1,4 @@
 const Todo = require("../modal/todo");
-const jwt = require("jsonwebtoken");
 
 exports.getItem = (req, res, next) => {
   Todo.findAll({ where: { userId: req.session.user.id } })
@@ -29,4 +28,14 @@ exports.postDeleteItem = (req, res, next) => {
     })
     .catch(err => console.log(err));
   res.json({ message: "deleted success" });
+};
+
+exports.postItemDone = (req, res, next) => {
+  const item = req.body.item;
+  Todo.findOne({ where: item.id }).then(result => {
+    result.update({
+      isDone: true
+    });
+    res.json({ data: result });
+  });
 };

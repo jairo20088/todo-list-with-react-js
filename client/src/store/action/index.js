@@ -15,5 +15,6 @@ export {
   getItemAction,
   getItem,
   deleteItem,
-  clearItem
+  clearItem,
+  ItemDone
 } from "./itemsAction";

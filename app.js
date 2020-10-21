@@ -16,7 +16,7 @@ const options = {
   database: process.env.DATABASE_NAME,
   clearExpired: true,
   checkExpirationInterval: 2000,
-  expiration: 9000
+  expiration: 86400000
 };
 
 const store = new MySQLStore(options);

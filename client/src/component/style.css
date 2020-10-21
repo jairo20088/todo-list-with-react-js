@@ -1,0 +1,18 @@
+.Items {
+  background-color: #e5effb;
+  box-shadow: 3px 3px 3px #00000021, -3px -3px 3px #ffffff42;
+  border-radius: 12px;
+  font-size: 2.2rem;
+  padding: 1rem 3rem 2rem 3rem;
+  margin-top: 2rem;
+  transition: all 0.2s;
+}
+.Items:hover {
+  background-color: #d1e0f3;
+}
+.itemsDone {
+  background-color: #92d49d;
+}
+.itemsDone:hover {
+  background-color: #7eb687;
+}

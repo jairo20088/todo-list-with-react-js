@@ -25,7 +25,6 @@ function App(props) {
       ) : (
         <Redirect to="/login" />
       )}
-
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
     </div>
